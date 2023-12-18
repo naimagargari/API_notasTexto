@@ -13,7 +13,7 @@ connection.connect((err) => {
     console.error('Error de conexión', err);
     return;
   }
-  console.log('Conexión establecida correctamente!');
+  console.log('Conexión establecida correctamente!👍');
 });
 
 module.exports = connection;
