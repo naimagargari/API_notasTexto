@@ -1,12 +1,12 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const db = require('./db'); 
+const db = require("./db");
 
-app.get('/usuarios', (req, res) => {
-  db.query('SELECT * FROM usuarios', (err, results) => {
+app.get("/usuarios", (req, res) => {
+  db.query("SELECT * FROM usuarios", (err, results) => {
     if (err) {
-      console.error('Error al obtener usuarios:', err);
-      res.status(500).send('Error al obtener usuarios');
+      console.error("Error al obtener usuarios:", err);
+      res.status(500).send("Error al obtener usuarios");
       return;
     }
     res.json(results);
