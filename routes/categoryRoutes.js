@@ -1,24 +1,33 @@
-const express = require('express');
+const express = require("express");
+const categoryController = require("../controllers/categoryController");
+const authMiddleware = require("../middleware/authMiddleware.js");
 const router = express.Router();
-const categoryController = require('../controllers/categoryController');
-const authMiddleware = require('../middlewares/authMiddleware');
 
-// Middleware de autenticación para proteger estas rutas
-router.use(authMiddleware);
+// Obtener todas las categorías del usuario autenticado
+router.get("/categories", authMiddleware, categoryController.getCategories);
 
-//Obtener todas las categorías
-router.get('/', categoryController.getCategories);
+// Obtener detalles de una categoría por su ID
+router.get(
+  "/categories/:id",
+  authMiddleware,
+  categoryController.getCategoryById
+);
 
-//Categoría por su ID
-router.get('/:id', categoryController.getCategoryById);
+// Crear una nueva categoría
+router.post("/categories", authMiddleware, categoryController.createCategory);
 
-//Nueva categoría
-router.post('/', categoryController.createCategory);
+// Actualizar una categoría por su ID
+router.put(
+  "/categories/:id",
+  authMiddleware,
+  categoryController.updateCategory
+);
 
-//Actualizar una categoría por su ID
-router.put('/:id', categoryController.updateCategory);
-
-//Eliminar una categoría por su ID
-router.delete('/:id', categoryController.deleteCategory);
+// Eliminar una categoría por su ID
+router.delete(
+  "/categories/:id",
+  authMiddleware,
+  categoryController.deleteCategory
+);
 
 module.exports = router;
